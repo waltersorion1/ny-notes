@@ -9,6 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
 
+const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -45,7 +47,7 @@ app.use(passport.session());
 
 
 // Static Files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Templating Engine
 app.use(expressLayouts);
