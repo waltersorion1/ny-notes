@@ -10,7 +10,8 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 
 const app = express();
-const port = 5000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
+
 
 app.use(session({
   secret: 'keyboard cat',
@@ -63,6 +64,6 @@ app.use((req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-})
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
