@@ -1,4 +1,4 @@
-const cacheName = 'cache-v1';
+const CACHE_NAME = 'static-cache';
 const resourcesToPrecache = [
   '/',
   'css/main.css',
@@ -18,40 +18,55 @@ const resourcesToPrecache = [
   'manifest.json'
 ];
 
+// Install event: Precache static assets
 self.addEventListener('install', event => {
-  console.log('Service worker install event!');
+  console.log('[SW] Install');
   event.waitUntil(
-    caches.open(cacheName)
-      .then(cache => {
-        return cache.addAll(resourcesToPrecache);
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(resourcesToPrecache);
+    })
   );
-  self.skipWaiting(); //Activate sw immediately
+  self.skipWaiting(); // Immediately take control
 });
 
+// Activate event: Clean up any old caches
 self.addEventListener('activate', event => {
-  console.log('[ServiceWorker] Activate');
+  console.log('[SW] Activate');
   event.waitUntil(
-    caches.keys().then((keys) => 
-      Promise.all(
-        keys.map((key) => {
-          if (key !== cacheName) {
-            console.log('[ServiceWorker] deleting old cache:', key);
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            console.log('[SW] Removing old cache:', key);
             return caches.delete(key);
           }
         })
-      )
-    )
-  );
-  self.clients.claim(); // Start controlling all clients immediately
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(caches.match(event.request)
-    .then(cachedResponse => {
-      console.log('Resources fetched or from caches');
-      return cachedResponse || fetch(event.request);
+      );
     })
   );
-  
+  self.clients.claim();
+});
+
+// Fetch event: Serve from cache, update in background (stale-while-revalidate)
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request)
+        .then(networkResponse => {
+          return caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+        })
+        .catch(() => {
+          // If network fails, just use cached version
+          return cachedResponse;
+        });
+
+      // Serve cached version first (if exists), then update in background
+      return cachedResponse || fetchPromise;
+    })
+  );
 });
