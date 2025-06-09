@@ -1,3 +1,4 @@
+// public/sw.js
 const CACHE_NAME = 'static-cache';
 const resourcesToPrecache = [
   '/',
@@ -15,7 +16,8 @@ const resourcesToPrecache = [
   'img/screenshot3.jpg',
   'img/today.jpg',
   'img/tomorrow.jpg',
-  'manifest.json'
+  'manifest.json',
+  'offline.html'
 ];
 
 // Install event: Precache static assets
@@ -52,21 +54,30 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
+    caches.match(event.request).then(cachedResponse =>{
       const fetchPromise = fetch(event.request)
         .then(networkResponse => {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
+          // cache only successful response
+          if (
+            networkResponse.status === 200 &&
+            networkResponse.type === 'basic'
+          ) {
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, networkResponse.clone());
+            });
+          }
+          return networkResponse;
         })
         .catch(() => {
-          // If network fails, just use cached version
-          return cachedResponse;
+          // If offline and the request is for the navigator page, serve fallback
+          if (event.request.mode === 'navigate') {
+            return caches.match('offline.html');
+          }
         });
 
-      // Serve cached version first (if exists), then update in background
-      return cachedResponse || fetchPromise;
+        // Return cached version first, the update in background
+        return cachedResponse || fetchPromise;
     })
   );
+
 });

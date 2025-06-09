@@ -1,5 +1,7 @@
 // server/controller/mainController.js
-const mainLayout = '../views/layouts/front-page';
+const frontPageLayout = '../views/layouts/front-page';
+const mainLayout = '../views/layouts/main';
+
 /**
  * GET /
  * Homepage
@@ -12,7 +14,7 @@ exports.homepage = async (req, res) => {
 
   res.render('index', {
     locals,
-    layout: mainLayout
+    layout: frontPageLayout
   });
 }
 

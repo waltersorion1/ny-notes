@@ -60,6 +60,12 @@ app.use((req, res, next) => {
   next();
 });
 
+//
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
+
 // Routes
 app.use('/', require('./server/routes/auth'));
 app.use('/', require('./server/routes/index'));

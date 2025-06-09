@@ -88,6 +88,12 @@ h1,h2,h3,h4,h5,h6 {
   width: auto;
 }
 
+/* Offline Icon */
+.offline-icon {
+  font-size: 5rem;
+  color: grey;
+}
+
 
 /* Put Stars at oposite angles after the title */
 /* .home-title::before {
