@@ -20,13 +20,32 @@ self.addEventListener('install', event => {
         return cache.addAll(resourcesToPrecache);
       })
   );
+  self.skipWaiting(); //Activate sw immediately
 });
 
-self.addEventListener('fecth', event => {
+self.addEventListener('activate', event => {
+  console.log('[ServiceWorker] Activate');
+  event.waitUntil(
+    caches.keys().then((keys) => 
+      Promise.all(
+        keys.map((key) => {
+          if (key !== cacheName) {
+            console.log('[ServiceWorker] deleting old cache:', key);
+            return caches.delete(key);
+          }
+        })
+      )
+    )
+  );
+  self.clients.claim(); // Start controlling all clients immediately
+});
+
+self.addEventListener('fetch', event => {
   event.respondWith(caches.match(event.request)
     .then(cachedResponse => {
+      console.log('Resources fetched or from caches');
       return cachedResponse || fetch(event.request);
     })
   );
-    
+  
 });
