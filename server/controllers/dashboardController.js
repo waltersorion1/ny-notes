@@ -2,6 +2,8 @@
 const Note = require('../models/Notes');
 const mongoose = require('mongoose');
 
+const dashboardLayout = '../views/layouts/dashboard';
+
 /**
  * GET /
  * Dashboard
@@ -62,7 +64,7 @@ exports.dashboardViewNote = async (req, res) => {
     res.render('dashboard/view-note', {
       noteID: req.params.id,
       note,
-      layout: '../views/layouts/dashboard'
+      layout: dashboardLayout
     })
   } else {
     res.send('Something went wrong.');
@@ -111,7 +113,7 @@ exports.dashboardDeleteNote = async (req, res) => {
  */
 exports.dashboardAddNote = async (req, res) => {
   res.render('dashboard/add', {
-    layout: '../views/layouts/dashboard'
+    layout:  dashboardLayout
   });
 }
 
@@ -140,7 +142,7 @@ exports.dashboardSearch = async (req, res) => {
   try {
     res.render('dashboard/search', {
       searchResults: '',
-      layout: '../view/layouts/dashboard'
+      layout:  dashboardLayout
     })
     
   } catch (error) {
@@ -167,7 +169,7 @@ exports.dashboardSearchSubmit = async (req, res) => {
 
     res.render('dashboard/search', {
       searchResults,
-      layout: '../views/layouts/dashboard'
+      layout:  dashboardLayout
     })
     
   } catch (error) {
