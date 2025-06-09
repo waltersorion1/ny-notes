@@ -9,7 +9,13 @@ const resourcesToPrecache = [
   'img/human-3.svg',
   'img/logo-light.png',
   'img/noise-bg.png',
-  'img/stars.svg'
+  'img/stars.svg',
+  'img/screenshot1.jpg',
+  'img/screenshot2.jpg',
+  'img/screenshot3.jpg',
+  'img/today.jpg',
+  'img/tomorrow.jpg',
+  'manifest.json'
 ];
 
 self.addEventListener('install', event => {

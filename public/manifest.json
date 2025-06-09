@@ -26,7 +26,7 @@
       "short_name": "Today",
       "description": "View weather information for today",
       "url": "/today?source=pwa",
-      "icons": [{ "src": "/img/today.jpeg", "sizes": "192x192" }]
+      "icons": [{ "src": "/img/today.jpg", "sizes": "192x192" }]
     },
     {
       "name": "How's the weather tomorrow?",
@@ -45,9 +45,21 @@
       "form_factor": "narrow"
     },
     {
+      "src": "/img/screenshot3.jpg",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
       "src": "/img/screenshot2.jpg",
       "type": "image/jpg",
       "sizes": "720x540",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/img/screenshot4.jpg",
+      "type": "image/jpg",
+      "sizes": "1920x1031",
       "form_factor": "wide"
     }
   ]
