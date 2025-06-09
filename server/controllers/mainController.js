@@ -20,6 +20,38 @@ exports.homepage = async (req, res) => {
 
 /**
  * GET /
+ * Features
+ */
+exports.features = async (req, res) => {
+  const locals = {
+    title: 'Features - NodeNotes',
+    description: 'Free NodeJs Notes App'
+  };
+  
+  res.render('features', {
+    locals,
+    layout: mainLayout
+  });
+}
+
+/**
+ * GET /
+ * FAQs
+ */
+exports.faqs = async (req, res) => {
+  const locals = {
+    title: 'FAQs - NodeNotes',
+    description: 'Free NodeJs Notes App'
+  };
+  
+  res.render('faqs', {
+    locals,
+    layout: mainLayout
+  });
+}
+
+/**
+ * GET /
  * About
  */
 exports.about = async (req, res) => {
@@ -29,6 +61,22 @@ exports.about = async (req, res) => {
   };
   
   res.render('about', {
+    locals,
+    layout: mainLayout
+  });
+}
+
+/**
+ * GET /
+ * Contact
+ */
+exports.contact = async (req, res) => {
+  const locals = {
+    title: 'Contact - NodeNotes',
+    description: 'Free NodeJs Notes App'
+  };
+  
+  res.render('contact', {
     locals,
     layout: mainLayout
   });

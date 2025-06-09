@@ -8,13 +8,14 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--background-color);
-  color: var(--bs-primary-rgb);
+  color: var(--text-color);
   font-weight: 300;
   font-size: 1.2rem;
   background-image: url(../img/noise-bg.png);
 }
 
 h1,h2,h3,h4,h5,h6 {
+  color: var(--bs-primary-rgb);
   font-family: 'Unbounded', cursive;
   font-weight: 800;
 }
@@ -92,6 +93,10 @@ h1,h2,h3,h4,h5,h6 {
 .offline-icon {
   font-size: 5rem;
   color: grey;
+}
+
+a:hover {
+  color: var(--bs-primary-rgb);
 }
 
 

@@ -54,13 +54,15 @@ app.use(expressLayouts);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
-// Make user available in all views
+// Make user and current path available in all views
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
   next();
 });
 
-//
+
+// Handle routes caching
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store');
   next();
