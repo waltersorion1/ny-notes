@@ -1,6 +1,8 @@
 :root {
-  --background-color: #ffc700;
-  --bs-primary-rgb: #12296c;
+  --background-color: #efefef;
+  --bs-primary-rgb: #00afcb;
+  --text-color: #1c1c1e;
+  --accent: #003344;
 }
 
 body {
@@ -33,8 +35,8 @@ h1,h2,h3,h4,h5,h6 {
   --bs-btn-bg: var(--bs-primary-rgb);
   --bs-btn-border-color: var(--bs-primary-rgb);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0043a8;
-  --bs-btn-hover-border-color: #0043a8;
+  --bs-btn-hover-bg: #00c1df;
+  --bs-btn-hover-border-color: #00c1df;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: var(--bs-primary-rgb);
@@ -49,8 +51,8 @@ h1,h2,h3,h4,h5,h6 {
   --bs-btn-color: var(--bs-primary-rgb);
   --bs-btn-border-color: var(--bs-primary-rgb);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0043a8;
-  --bs-btn-hover-border-color: #0043a8;;
+  --bs-btn-hover-bg: #00c1df;
+  --bs-btn-hover-border-color: #00c1df;
   --bs-btn-focus-shadow-rgb: 13, 110, 253;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: var(--bs-primary-rgb);
@@ -80,7 +82,15 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
-.home-title::before {
+/* Header */
+.header_logo {
+  height: 4.5rem;
+  width: auto;
+}
+
+
+/* Put Stars at oposite angles after the title */
+/* .home-title::before {
   content: url('../img/stars.svg');
   position: absolute;
   left: -50px;
@@ -92,4 +102,4 @@ h1,h2,h3,h4,h5,h6 {
   position: absolute;
   right: -50px;
   bottom: -30px;
-}
+} */
