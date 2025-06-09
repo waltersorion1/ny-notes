@@ -54,6 +54,12 @@ app.use(expressLayouts);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
+// Make user available in all views
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
+
 // Routes
 app.use('/', require('./server/routes/auth'));
 app.use('/', require('./server/routes/index'));

@@ -68,7 +68,7 @@ router.get('/logout', (req, res) => {
 
 // Presist user data successful authentication
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  done(null, user.id); // Save user ID in session
 });
 
 
@@ -76,7 +76,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
-    done(null, user);
+    done(null, user); // This becomes req.user
   } catch (err) {
     done(err, null);
   }

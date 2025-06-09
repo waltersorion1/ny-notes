@@ -5,10 +5,21 @@
         <h1 class="display-2 fw-bold mb-4 position-relative home-title">
           Write your thoughts down as they come to you.
         </h1>
-        <p class="fs-4 mb-4">
-          Notes is a simple to use free note taking app made with Node.Js, EJS & MongoDB.
-        </p>
-        <a href="/auth/google" class="btn btn-primary btn-lg">Try Notes, it's FREE!</a>
+        <% if (user) { %>
+         <p class="fs-4 mb-4">
+            Welcome back <%= user.firstName %>!
+         </p>
+        <% } else { %>
+         <p class="fs-4 mb-4">
+            Notes is a simple to use free note taking app made with Node.Js, EJS & MongoDB.
+         </p>
+        <% } %>
+
+        <% if (user) { %>
+         <a href="/dashboard" class="btn btn-primary btn-lg">Go to Dashbord</a>
+        <% } else { %>
+         <a href="/auth/google" class="btn btn-primary btn-lg">Try Notes, it's FREE!</a>
+        <% } %>
       </div>
     </div>
   </main>

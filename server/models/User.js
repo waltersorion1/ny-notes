@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   },
   lastName: {
     type: String,
-    required: true
+    default: "" // Set a default because some google accounts don't have last name because they're optional on google accounts for businesses
   },
   profileImage: {
     type: String,
